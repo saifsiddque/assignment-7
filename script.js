@@ -105,26 +105,28 @@ const start = () => {
 
   let count = 3;
   countdownOverlay.style.display = "flex";
+  fetch(count)
+  .then(res => res.json())
 
   const startCountdown = setInterval(() => {
-    countdownOverlay.innerHTML = '<h1>${count}</h1>';
+    countdownOverlay.innerHTML = `<h1> ${count} </h1>`;
 
     // finished timer
     if (count == 0) {
       // -------------- START TYPING -----------------
       document.addEventListener("keydown", typeController);
-      countdownOverlay.style.display = "flex";
+      countdownOverlay.style.display = "none";
       display.classList.remove("inactive");
-
       clearInterval(startCountdown);
       startTime = new Date().getTime();
     }
+    
     count--;
   }, 1000);
 };
 
 // START Countdown
-startBtn.addEventListener("click", start);
+startBtn.addEventListener("click", start)
 
 // If history exists, show it
 displayHistory();
